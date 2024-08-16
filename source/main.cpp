@@ -1,18 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <wiiuse/wpad.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include "sdl_starter.h"
+#include "sdl_assets_loader.h"
 
 SDL_Window *window = nullptr;
 SDL_Renderer *renderer = nullptr;
-SDL_GameController *controller = nullptr;
 
 const int SPEED = 600;
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
 
 SDL_Rect player = {SCREEN_WIDTH / 2 - 64, SCREEN_HEIGHT / 2 - 64, 64, 64};
 
@@ -65,7 +62,7 @@ void update(float deltaTime)
     {
         player.y -= SPEED * deltaTime;
     }
-    
+
     else if (padHeld & WPAD_BUTTON_DOWN && player.y < SCREEN_HEIGHT - player.h)
     {
         player.y += SPEED * deltaTime;
@@ -86,26 +83,12 @@ void render()
 
 int main(int argc, char **argv)
 {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0)
-    {
-        SDL_Log("SDL_Init: %s\n", SDL_GetError());
-        return -1;
-    }
-
     window = SDL_CreateWindow("My Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if (!window)
-    {
-        SDL_Log("SDL_CreateWindow: %s\n", SDL_GetError());
-        SDL_Quit();
-        return -1;
-    }
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (!renderer)
+    if (startSDL(window, renderer) > 0)
     {
-        SDL_Log("SDL_CreateRenderer: %s\n", SDL_GetError());
-        SDL_Quit();
-        return -1;
+        return 1;
     }
 
     WPAD_Init();
