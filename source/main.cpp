@@ -36,7 +36,6 @@ void handleEvents()
 
 void update(float deltaTime)
 {
-
     // WPAD_ButtonsDown tells us which buttons were pressed in this loop
     // this is a "one shot" state which will not fire again until the button has been released
     const u32 padDown = WPAD_ButtonsDown(0);
@@ -91,11 +90,11 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    WPAD_Init();
-
     Uint32 previousFrameTime = SDL_GetTicks();
     Uint32 currentFrameTime = previousFrameTime;
     float deltaTime = 0.0f;
+
+    WPAD_Init();
 
     while (true)
     {
