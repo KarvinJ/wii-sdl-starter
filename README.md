@@ -4,7 +4,7 @@ A Very simple Nintendo wii SDL2 STARTER.
 
 # Building
 
-Requires devkitPro with the Nintendo wii toolchain, SDL2, SDL2_Image SDL2_mixer SDL2_ttf for the wii.
+Requires devkitPro with the Nintendo wii toolchain and SDL2 for the wii.
 
 ## Building instructions
 
