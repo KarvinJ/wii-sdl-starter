@@ -18,8 +18,6 @@ I built everything using Windows 10
 
 *I recommend to install all the wii-portlibs libraries/
 
-* Clone this repo:  
-  `git clone https://github.com/KarvinJ/wii-sdl-starter.git`
-
+* Clone this repo
 * `cd wii-sdl-starter`
 * `make`
